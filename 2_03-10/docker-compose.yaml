@@ -1,6 +1,9 @@
 services:
   backend:
     image: pavlovus/example-backend
+    environment:
+      REDIS_HOST: redis
+    restart: unless-stopped
     platform: linux/amd64
     ports:
       - 8080:8080
@@ -11,3 +14,5 @@ services:
     ports:
       - 5001:5001
     container_name: frontend
+  redis:
+    image: redis:7
