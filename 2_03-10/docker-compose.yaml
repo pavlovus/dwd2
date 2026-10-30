@@ -1,0 +1,13 @@
+services:
+  backend:
+    image: pavlovus/example-backend
+    platform: linux/amd64
+    ports:
+      - 8080:8080
+    container_name: backend
+  frontend:
+    image: pavlovus/example-frontend
+    platform: linux/amd64
+    ports:
+      - 5001:5001
+    container_name: frontend
