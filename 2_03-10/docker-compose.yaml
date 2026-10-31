@@ -3,16 +3,30 @@ services:
     image: pavlovus/example-backend
     environment:
       REDIS_HOST: redis
-    restart: unless-stopped
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DB}
     platform: linux/amd64
     ports:
       - 8080:8080
-    container_name: backend
   frontend:
     image: pavlovus/example-frontend
     platform: linux/amd64
     ports:
       - 5001:5001
-    container_name: frontend
   redis:
     image: redis:7
+    restart: unless-stopped
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+volumes:
+  pgdata:
