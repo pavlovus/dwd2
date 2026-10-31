@@ -8,8 +8,6 @@ COPY . .
 
 ENV PORT=8080
 
-ENV REQUEST_ORIGIN=http://localhost:5001
-
 RUN go build
 
 CMD ["./server"]
